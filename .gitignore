@@ -22,3 +22,8 @@ node_modules/
 # Build output
 build/
 dist/
+
+# Agent runtime
+agent/pid/
+agent/log/
+agent/log.txt
