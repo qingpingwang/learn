@@ -12,7 +12,7 @@ function-call 出现之后，llm 才和宿主的机器、代码产生关联。�
 
 ### 工具怎么声明
 
-openai 的官方协议格式可以在这里查：[https://developers.openai.com/api/reference/resources/chat/subresources/completions/methods/create](https://developers.openai.com/api/reference/resources/chat/subresources/completions/methods/create)
+openai 的官方协议格式可以[在这里查](https://developers.openai.com/api/reference/resources/chat/subresources/completions/methods/create)。
 
 我们定义的 tools 如下：
 
