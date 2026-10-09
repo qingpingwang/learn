@@ -107,8 +107,7 @@ def receive_message(body: MessageIn):
 
 
 if __name__ == "__main__":
-    print(receive_message(MessageIn(message="今天杭州天气怎么样？")))
-    # host = "0.0.0.0"
-    # port = 8000
-    # logger.info(f"Server is running on {host}:{port}")
-    # uvicorn.run(app, host=host, port=port)
+    host = "0.0.0.0"
+    port = 8000
+    logger.info(f"Server is running on {host}:{port}")
+    uvicorn.run(app, host=host, port=port)
