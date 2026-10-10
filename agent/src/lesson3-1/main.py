@@ -7,13 +7,12 @@ import uvicorn
 import os
 from dotenv import load_dotenv
 load_dotenv()
-import asyncio
 import json
 import requests
 import logging
 import uuid
 # 打印到根目录的log文件
-logging.basicConfig(level=logging.INFO, filename="./log/lesson3.log")
+logging.basicConfig(level=logging.INFO, filename="./log/lesson3-1.log")
 logger = logging.getLogger(__name__)
 
 api_key = os.getenv("API_KEY")
@@ -77,6 +76,10 @@ def get_context(context_id: str):
     return context_list[context_id]
 
 
+def request_messages(messages):
+    return [{"role": "system", "content": SYSTEM_PROMPT}, *messages]
+
+
 def post_request(url, payload):
     headers = {"Authorization": f"Bearer {api_key}"}
     response = requests.post(url, headers=headers, json=payload)
@@ -108,7 +111,7 @@ def handle_tools(messages: list, response: dict):
     # 递归调用
     return handle_tools(messages, post_request(
         f"{base_url}/chat/completions",
-        {"model": model_name, "messages": messages, "tools": TOOLS},
+        {"model": model_name, "messages": request_messages(messages), "tools": TOOLS},
     ))
 
 
@@ -125,7 +128,7 @@ def chat(body: MessageIn):
     messages.append({"role": "user", "content": body.message})
     response = post_request(
         f"{base_url}/chat/completions",
-        {"model": model_name, "messages": messages, "tools": TOOLS},
+        {"model": model_name, "messages": request_messages(messages), "tools": TOOLS},
     )
     logger.info("response: %s", json.dumps(response, ensure_ascii=False, indent=2))
     # 解析工具调用
@@ -136,7 +139,7 @@ def event_stream(messages):
     response = requests.post(
         f"{base_url}/chat/completions",
         headers={"Authorization": f"Bearer {api_key}"},
-        json={"model": model_name, "messages": messages, "tools": TOOLS, "stream": True},
+        json={"model": model_name, "messages": request_messages(messages), "tools": TOOLS, "stream": True},
         stream=True,
         timeout=120,
     )
