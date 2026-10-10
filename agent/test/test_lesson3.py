@@ -40,6 +40,14 @@ def stream_chat(context_id, message):
                 content = (choice.get("delta") or {}).get("content")
                 if content:
                     print(content, end="", flush=True)
+                # 输出工具调用
+                tool_calls = choice.get("delta", {}).get("tool_calls", [])
+                for tool_call in tool_calls:
+                    tool_call_type = tool_call.get("type", "")
+                    if tool_call_type == "function_result":
+                        print("\nresult:", tool_call["id"], tool_call["function"]["name"], tool_call["function"]["arguments"], tool_call["content"])
+                    else:
+                        print(tool_call.get("id", ""), tool_call["function"].get("name", ""), tool_call["function"].get("arguments", ""), end="", flush=True)
     print()
 
 

@@ -211,6 +211,18 @@ def stream_chat(body: MessageIn):
                     "tool_call_id": function_call["id"],
                     "content": content,
                 })
+                yield_data = {
+                    "choices": [{
+                        "delta": {
+                            "tool_calls": [{
+                                "id": function_call["id"],
+                                "type": "function_result",
+                                "function": {"name": function_call["name"], "arguments": function_call["arguments"]},
+                                "content": content,
+                            }]
+                        }
+                    }]}
+                yield f"data: {json.dumps(yield_data, ensure_ascii=False)}\n\n"
         # 单次调用的结束，进入下一轮推理
 
     return StreamingResponse(generate(), media_type="text/event-stream")
