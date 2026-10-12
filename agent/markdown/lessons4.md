@@ -345,9 +345,6 @@ result: call_00_HxYcefhvH0GVlenp5zM81767 search {"query": "萧炎怎么样", "gl
 在下一章节中，我们将实现skills的加载，有了skills我们就能插件化的管理agent的能力以及自己的sop了。
 
 
-```markdown
 仓库地址：[https://github.com/qingpingwang/learn](https://github.com/qingpingwang/learn)
 
 交流群（QQ）：[图形/渲染/音视频/AI应用交流群](https://qm.qq.com/q/2d9YzGPNmQ)（523219063）
-```
-
