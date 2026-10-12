@@ -27,3 +27,4 @@ dist/
 agent/pid/
 agent/log/
 agent/log.txt
+agent/src/lesson4/rag/

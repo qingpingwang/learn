@@ -4,3 +4,5 @@ python-multipart
 python-dotenv
 python-jose[cryptography]
 requests
+graphrag==3.3.0
+sentence-transformers
