@@ -76,7 +76,7 @@ def dynamic_system_prompt(agent, system_prompt: str) -> str:
 
 
 
-#### 必要的工具
+### 必要的工具
 
 这里要给 agent 提供两个工具，让它自己去加载 skill。
 
