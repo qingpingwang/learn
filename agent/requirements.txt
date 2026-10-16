@@ -10,3 +10,7 @@ sentence-transformers
 langchain==1.4.6
 langgraph==1.2.15
 langchain-openai==1.7.2
+deepagents==0.7.26
+wcmatch==11.1
+langchain-anthropic==1.7.6
+langchain-google-genai==4.4.2
