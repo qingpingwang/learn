@@ -4,5 +4,9 @@ python-multipart
 python-dotenv
 python-jose[cryptography]
 requests
+beautifulsoup4==4.15.0
 graphrag==3.3.0
 sentence-transformers
+langchain==1.4.6
+langgraph==1.2.15
+langchain-openai==1.7.2
