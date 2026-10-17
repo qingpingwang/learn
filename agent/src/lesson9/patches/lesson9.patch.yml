@@ -1,0 +1,47 @@
+# 第 9 课的 dsh patch：叠在 sdk-minimal 上。
+# 一条一条往下读：带 id 的是改 profile 里已有的那一行，insert 是插入新行。
+
+# 1) 系统提示：改 sdk-minimal 里 system-prompt 这一行的配置
+- id: system-prompt
+  config:
+    personaPrefix: 你是测试助手，用中文回答。你没有 shell，只能用 read / write / edit 工具在当前工作目录里读写文件，路径一律用相对路径。用户的请求和某个技能对得上时，先调用 skill 工具加载它，再照着做。查询天气时必须调用 get_weather 工具，不要凭记忆回答，根据工具结果给出简洁的天气概况和穿衣/出行建议。
+
+# 2) 会话日志默认会随请求上传给 DeepSeek，关掉
+- id: session-log-deepseek
+  disabled: true
+
+# 3) 关掉 bash：和第八课一样，不让模型跑命令
+- id: persistent-bash
+  disabled: true
+
+# 4) 插入插件
+- insert:
+  # 自己写的 ctx.fs 提供者（sdk-minimal 本来没有 fs 这一行）
+  - id: fs-virtual
+    name: ../plugins/fs-virtual.mjs
+    config:
+      backend: local-disk
+      logFile: data/fs-virtual.log
+
+  # read / write / edit 文件工具，底下调用 ctx.fs
+  - id: tool-fs
+    name: '@deepseek-ai/dsh-tool-fs'
+
+  # 技能：注册表 + 从磁盘目录发现 + 给模型的 skill 工具
+  - id: skill
+    name: '@deepseek-ai/dsh-skill'
+  - id: skill-filesystem
+    name: '@deepseek-ai/dsh-skill-filesystem'
+    config:
+      includeDefaultRoots: false
+      customSkillDirs:
+        - skills
+  - id: tool-skill
+    name: '@deepseek-ai/dsh-tool-skill'
+
+  # 天气工具
+  - id: demo-weather-tool
+    name: ../plugins/weather-tool.mjs
+    config:
+      endpoint: https://wttr.in
+      timeoutMs: 20000
