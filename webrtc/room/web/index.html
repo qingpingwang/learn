@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WebRTC 对话房间</title>
+<link rel="stylesheet" href="/webrtc/style.css">
+</head>
+<body>
+<h1>WebRTC 对话房间</h1>
+
+<div id="lobby">
+  <div class="panel">
+    <div class="row"><button id="create">新建房间</button></div>
+    <div id="created">房间号 <code id="new-room"></code>，密码 <code id="new-pass"></code>（只显示这一次，发给要加入的人）</div>
+  </div>
+  <div class="panel">
+    <div class="row">
+      <input id="room" placeholder="房间号" inputmode="numeric">
+      <input id="password" placeholder="密码">
+      <input id="name" placeholder="昵称">
+      <button id="join">加入</button>
+    </div>
+  </div>
+</div>
+
+<div id="room-view">
+  <div class="panel">
+    <div class="row">
+      <span>房间 <b id="cur-room"></b></span>
+      <button id="mic" class="secondary">静音</button>
+      <button id="cam" class="secondary">关摄像头</button>
+      <button id="hangup">退出</button>
+    </div>
+  </div>
+  <div id="grid"></div>
+</div>
+<p id="status"></p>
+
+<script src="/webrtc/app.js"></script>
+</body>
+</html>

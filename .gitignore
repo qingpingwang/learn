@@ -37,3 +37,7 @@ agent/src/lesson11/data/
 workflow/comfyui/pid/
 workflow/comfyui/log/
 workflow/comfyui/.macfix/
+
+# WebRTC runtime
+webrtc/room/pid/
+webrtc/room/log/
