@@ -1,0 +1,6 @@
+[submodule "workflow/dify/dify"]
+	path = workflow/dify/dify
+	url = https://github.com/langgenius/dify.git
+[submodule "workflow/comfyui/ComfyUI"]
+	path = workflow/comfyui/ComfyUI
+	url = https://github.com/Comfy-Org/ComfyUI.git
